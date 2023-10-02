@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Asistencia para SALA101</title>
+</head>
+<body>
+    <h1>Asistencia para SALA101</h1>
+
+    <!-- Botón para registrar la asistencia -->
+    <button id="registrarAsistencia">Presente</button>
+
+    <script>
+        // JavaScript para registrar la asistencia al hacer clic en el botón
+        document.getElementById("registrarAsistencia").addEventListener("click", function() {
+            // Obtiene el nombre de usuario (puedes personalizar esto)
+            var nombreUsuario = "alfredo";
+
+            // Obtiene la hora actual
+            var horaActual = new Date().toLocaleString();
+
+            // Obtiene la dirección IP del usuario (esto se hace en el lado del servidor)
+            // En el lado del servidor, puedes obtener la IP con $_SERVER['REMOTE_ADDR']
+
+            // Crea una cadena con la información de la asistencia
+            var registroAsistencia = "Usuario: " + nombreUsuario + "\nHora: " + horaActual;
+
+            // Envía la información al archivo PHP para el registro
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "registrar_asistencia.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert(xhr.responseText);
+                }
+            };
+            xhr.send("registro=" + encodeURIComponent(registroAsistencia));
+        });
+    </script>
+</body>
+</html>
